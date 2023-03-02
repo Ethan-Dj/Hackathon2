@@ -21,7 +21,7 @@ function submitForm(e) {
   function getLocation(position) {
     const lat = position.coords.latitude;
     const long = position.coords.longitude;
-    const locationData = { lat, long };
+    const locationData = {lat, long};
 
     fetch("/api/location", {
       method: "POST",
@@ -29,13 +29,13 @@ function submitForm(e) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(locationData)
-    });
-    console.log(locationData)
+    }).then(savedData);
   }
   
   window.navigator.geolocation.getCurrentPosition(getLocation);
 
-  window.location.reload()
+  savedData()
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,7 +83,7 @@ function mapping (data){
           // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
           style: 'mapbox://styles/mapbox/streets-v12',
           center: [data[0].long, data[0].lat], 
-          zoom: 12
+          zoom: 13
       });
       ////////////////////////////////////////////////////////////////////////////////////////////
       const geojson = {
