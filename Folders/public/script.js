@@ -50,11 +50,31 @@ function mapping (data){
   // points for coords
     let points = []
     for (let i = data.length -1 ; i >= 0; i --){
-      let now = [51.57755, -0.190570]
+      let now = [data[i].long, data[i].lat]
       points.push(now)
     }
-
+    console.log(points)
     /////////////////////////
+
+    ////////////////////////
+    //line between coords
+    let features1 = []
+    data.forEach((elem,index) => {
+      const bracket = {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [data[index].long, data[index].lat]
+          },
+          properties: {
+            title: 'none',
+            description: 'none'
+          }
+      }
+      features1.push(bracket)
+    })
+
+
 
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiZXRoYW4xMjEiLCJhIjoiY2wzYmV2bW50MGQwbTNpb2lxdm56cGdpNyJ9.-wLLlz-sFhNPiXCyVCQ6kg';
@@ -68,30 +88,7 @@ function mapping (data){
       ////////////////////////////////////////////////////////////////////////////////////////////
       const geojson = {
     type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [-122.483396, 37.8327]
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Washington, D.C.'
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [-122.483696, 37.833818]
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'San Francisco, California'
-        }
-      }
-    ]
+    features: features1
   };
 
   // add markers to map
@@ -113,10 +110,7 @@ function mapping (data){
                   'properties': {},
                   'geometry': {
                       'type': 'LineString',
-                      'coordinates': [
-                          [51.57755, -0.190570],
-                          [51.57755, -0.190571]
-                      ]
+                      'coordinates': points
                   }
               }
           });
