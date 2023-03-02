@@ -4,6 +4,7 @@ const bodyParser = require("body-parser")
 const dotenv = require("dotenv")
 const multer  = require('multer')
 
+
 const products_router = require('./routes/products.js')
 
 dotenv.config()
@@ -23,12 +24,27 @@ console.log("working")
 
 app.use('/api/', products_router)
 
-const upload = multer({ dest: 'uploads/' })
 
-app.post('/profile', upload.single('image'), function (req, res, next) {
-    console.log("here")
-    console.log(req.file)
+
+const fileStorageEngine = multer.diskStorage({
+    destination: (req, file, cb) => {
+         cb(null, "./uploads")
+        },
+    filename: (req, file,cb) => {
+        cb(null, Date.now() + '--image' + file.originalname) 
+    }
 })
+
+const upload = multer({storage: fileStorageEngine})
+
+app.post('/single', upload.single('image'), (req,res) => {
+    console.log(req.file)
+    res.send(req.file.path)
+})
+
+
+
+
 
 
 

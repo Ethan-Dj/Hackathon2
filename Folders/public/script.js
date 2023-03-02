@@ -1,13 +1,29 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// this content sends location data to the server
+
+document.getElementById("submit").addEventListener("click", submitForm)
 
 
+function submitForm(e) {
+  e.preventDefault();
 
+  function getLocation(position) {
+    const lat = position.coords.latitude;
+    const long = position.coords.longitude;
+    const locationData = { lat, long };
 
-  if (window.navigator.geolocation) {
-      window.navigator.geolocation.getCurrentPosition(console.log, console.log);
-    } 
-
-
-
+    fetch("/api/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(locationData)
+    });
+    console.log(locationData)
+  }
+  
+  window.navigator.geolocation.getCurrentPosition(getLocation);
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
