@@ -8,8 +8,8 @@ const getAllImages = () => {
 }
 
 const getAllLocations = () => {
-    return db('locations1')
-    .select('id','long','lat')
+    return db('locations2')
+    .select('long','lat')
     // .orderBy('id DESC')
 }
 
@@ -21,7 +21,7 @@ const addImage = (image) => {
 const addLocation = (location) => {
     location.lat = parseFloat(location.lat);
     location.long = parseFloat(location.long);
-    return db('locations1').insert(location);
+    return db('locations2').insert(location);
   };
 
 module.exports = {
