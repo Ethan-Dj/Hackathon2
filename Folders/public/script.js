@@ -1,3 +1,40 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+async function getImageLocations() {
+  const response = await fetch("/api/image")
+  const data = await response.json()
+  let locations = []
+  data.forEach(elem => locations.push(elem.img))
+  console.log(locations)
+  return locations
+}
+
+const images = getImageLocations()
+console.log(images)
+
+
+document.getElementById("image").style.backgroundImage = `url(${images[0]})`
+
+
+
+// this code sends an image but does not change page
+
+const form = document.getElementById('imageForm');
+form.addEventListener('submit', function(e) {
+  e.preventDefault(); // Prevent the form from being submitted to a new page
+
+  const formData = new FormData(form);
+
+  fetch('/single', {
+    method: 'POST',
+    body: formData
+  }).then(response => {
+    window.location.reload()
+  }).catch(error => {
+    // Handle any errors that occur during the fetch request
+  });
+});
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // This code takes all the locations from the location server
@@ -73,9 +110,6 @@ function mapping (data){
       }
       features1.push(bracket)
     })
-
-
-
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiZXRoYW4xMjEiLCJhIjoiY2wzYmV2bW50MGQwbTNpb2lxdm56cGdpNyJ9.-wLLlz-sFhNPiXCyVCQ6kg';
       const map = new mapboxgl.Map({

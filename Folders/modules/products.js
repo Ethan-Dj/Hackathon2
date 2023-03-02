@@ -4,7 +4,7 @@ const db = require('../config/db.js')
 const getAllImages = () => {
     return db('images')
     .select('id','img')
-    .orderBy('id DESC')
+    .orderBy('id','desc')
 }
 
 const getAllLocations = () => {
@@ -29,5 +29,4 @@ module.exports = {
     getAllLocations,
     addImage,
     addLocation
-
 }

@@ -3,9 +3,11 @@ const cors = require('cors')
 const bodyParser = require("body-parser")
 const dotenv = require("dotenv")
 const multer  = require('multer')
+const db = require('./config/db.js')
 
 
 const products_router = require('./routes/products.js')
+const { _addLocation } = require("./controllers/products.js")
 
 dotenv.config()
 const app = express()
@@ -20,10 +22,11 @@ app.listen(process.env.PORT, () => {
 
 app.use("/",express.static(__dirname + "/public"))
 
+app.use('/uploads', express.static('uploads'))
+
 console.log("working")
 
 app.use('/api/', products_router)
-
 
 
 const fileStorageEngine = multer.diskStorage({
@@ -38,9 +41,26 @@ const fileStorageEngine = multer.diskStorage({
 const upload = multer({storage: fileStorageEngine})
 
 app.post('/single', upload.single('image'), (req,res) => {
-    console.log(req.file)
-    res.send(req.file.path)
+    const location = req.file
+
+    function addImage (image) {
+        return db('images1')
+        .insert({ img: image })
+    }
+    
+    function _addImage (req,res) {
+        addImage(location)
+        .then(image => {
+            res.json(image)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    _addImage(req,res)
 })
+
 
 
 
