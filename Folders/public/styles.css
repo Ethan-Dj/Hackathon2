@@ -1,0 +1,69 @@
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 100px;
+}
+
+
+#image { 
+    height: 25vw;
+    width: 20vw; 
+    border: solid 4px #1314FB;
+    background-image: url("template.jpeg");
+    background-position: center center;
+    background-size: contain;
+    background-size: cover;
+}
+
+#map { 
+    height: 20vw;
+    width: 20vw; 
+    border: solid 4px #1314FB;
+}
+
+
+.marker {
+        background-image: url('dot.png');
+        background-size: cover;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        cursor: pointer;
+}
+
+#upload {
+    padding: 2px 20px;
+    border-radius: 10px;
+    border-color: #1314FB;
+    background-color: #1314FB;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+#buttonUpload {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#next {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.move {
+    width: 150px;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
