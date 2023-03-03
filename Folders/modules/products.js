@@ -2,7 +2,7 @@ const db = require('../config/db.js')
 
 
 const getAllImages = () => {
-    return db('images')
+    return db('images4')
     .select('id','img')
     .orderBy('id','desc')
 }

@@ -41,10 +41,10 @@ const fileStorageEngine = multer.diskStorage({
 const upload = multer({storage: fileStorageEngine})
 
 app.post('/single', upload.single('image'), (req,res) => {
-    const location = req.file
+    const location = req.file.filename
 
     function addImage (image) {
-        return db('images1')
+        return db('images4')
         .insert({ img: image })
     }
     

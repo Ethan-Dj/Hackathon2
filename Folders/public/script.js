@@ -5,16 +5,10 @@ async function getImageLocations() {
   const data = await response.json()
   let locations = []
   data.forEach(elem => locations.push(elem.img))
-  console.log(locations)
-  return locations
+  document.getElementById("image").style.backgroundImage = `url("uploads/${locations[0]}")`
 }
 
 const images = getImageLocations()
-console.log(images)
-
-
-document.getElementById("image").style.backgroundImage = `url(${images[0]})`
-
 
 
 // this code sends an image but does not change page
