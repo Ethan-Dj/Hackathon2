@@ -1,14 +1,42 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
+let num = 0 
 
-async function getImageLocations() {
+//getImageLocations(0)
+// savedData(0)
+
+document.getElementById("left").addEventListener("click",subtractNum)
+
+function subtractNum(e){
+  e.preventDefault()
+  if (num > 0){
+    num --
+    getImageLocations(num)
+    savedData(num)
+  }
+}
+
+
+document.getElementById("right").addEventListener("click",addNum)
+
+function addNum(e){
+  e.preventDefault()
+  if (num < numImg){
+    num ++
+    getImageLocations(num)
+    savedData(num)
+  }
+}
+
+async function getImageLocations(num) {
   const response = await fetch("/api/image")
   const data = await response.json()
   let locations = []
   data.forEach(elem => locations.push(elem.img))
-  document.getElementById("image").style.backgroundImage = `url("uploads/${locations[0]}")`
+  document.getElementById("image").style.backgroundImage = `url("uploads/${locations[num]}")`
 }
 
-const images = getImageLocations()
+getImageLocations(0)
+
 
 
 // this code sends an image but does not change page
@@ -32,13 +60,15 @@ form.addEventListener('submit', function(e) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // This code takes all the locations from the location server
-
-async function savedData(){
+let numImg = 1
+async function savedData(num){
   const response = await fetch("/api/location")
   const data = await response.json()
-  mapping(data)
+  numImg = data.length
+  mapping(data,num)
 }
-savedData()
+
+savedData(0)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // this content sends location data to the server
@@ -75,7 +105,7 @@ function submitForm(e) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-function mapping (data){
+function mapping (data,num){
 
   //////////////////////////
   // points for coords
@@ -110,7 +140,7 @@ function mapping (data){
           container: 'map',
           // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
           style: 'mapbox://styles/mapbox/streets-v12',
-          center: [data[0].long, data[0].lat], 
+          center: [data[num].long, data[num].lat], 
           zoom: 13
       });
       ////////////////////////////////////////////////////////////////////////////////////////////
