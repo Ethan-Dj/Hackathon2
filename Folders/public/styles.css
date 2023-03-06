@@ -4,13 +4,13 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 0;
 }
 
 
 #image { 
-    height: 25vw;
-    width: 20vw; 
+    height: 60vh;
+    width: 100vw; 
     border: solid 4px #1314FB;
     background-image: url("template.jpeg");
     background-position: center center;
@@ -19,8 +19,8 @@ body{
 }
 
 #map { 
-    height: 20vw;
-    width: 20vw; 
+    height: 40vh;
+    width: 100vw; 
     border: solid 4px #1314FB;
 }
 
@@ -35,8 +35,8 @@ body{
 }
 
 #upload {
-    padding: 2px 20px;
-    border-radius: 10px;
+    /* padding: 2px 2px; */
+    /* border-radius: 10px; */
     border-color: #1314FB;
     background-color: #1314FB;
     color: white;
@@ -45,9 +45,9 @@ body{
 }
 
 #buttonUpload {
-    padding: 10px;
+    /* padding: 2px; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
