@@ -2,15 +2,15 @@ const db = require('../config/db.js')
 
 
 const getAllImages = () => {
-    return db('images4')
+    return db('images5')
     .select('id','img')
     .orderBy('id','desc')
 }
 
 const getAllLocations = () => {
-    return db('locations2')
+    return db('locations5')
     .select('long','lat')
-    // .orderBy('id DESC')
+    .orderBy('id', 'desc')
 }
 
 const addImage = (image) => {
