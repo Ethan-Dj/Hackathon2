@@ -10,7 +10,7 @@ const getAllImages = () => {
 const getAllLocations = () => {
     return db('locations2')
     .select('long','lat')
-    // .orderBy('id DESC')
+    .orderBy('id', 'desc')
 }
 
 const addImage = (image) => {
