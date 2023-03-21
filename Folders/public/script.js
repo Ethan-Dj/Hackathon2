@@ -63,9 +63,8 @@ form.addEventListener('submit', function(e) {
 let numImg = 1
 async function savedData(num){
   const response = await fetch("/api/location")
-  let data = await response.json()
+  const data = await response.json()
   numImg = data.length
-  console.log("this",data)
   mapping(data,num)
 }
 
